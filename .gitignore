@@ -1,0 +1,9 @@
+# Ignore dependencies
+node_modules/
+out/
+
+# Ignore local env and logs
+.env
+.DS_Store
+.next/
+*.log
