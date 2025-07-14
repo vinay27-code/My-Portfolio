@@ -15,6 +15,14 @@ export default function Projects() {
     },
     {
       id: 2,
+      title: 'Tempe Bike Planner',
+      description: 'A comprehensive bike route planning application for Tempe city, featuring interactive maps, route optimization, bike-friendly path detection, and real-time navigation assistance for cyclists.',
+      githubUrl: 'https://github.com/vinay27-code/Tempe-Bike-Planner.git',
+      technologies: ['React', 'JavaScript', 'Maps API', 'Route Planning', 'CSS3'],
+      category: 'Web Application'
+    },
+    {
+      id: 3,
       title: 'Deep Learning Skin Lesion Classification',
       description: 'Advanced machine learning project implementing SMOTE technique for improved skin lesion classification using deep learning algorithms, achieving enhanced accuracy in medical image analysis.',
       githubUrl: 'https://github.com/vinay27-code/Deep-Learning-with-SMOTE-for-Improved-Skin-Lesion-Classification.git',
@@ -22,7 +30,7 @@ export default function Projects() {
       category: 'Machine Learning'
     },
     {
-      id: 3,
+      id: 4,
       title: 'Crypto Rankings Viewer',
       description: 'Real-time cryptocurrency tracking application that displays current market rankings, prices, and trends with interactive charts and comprehensive market data visualization.',
       githubUrl: 'https://github.com/vinay27-code/crypto-rankings-viewer.git',
