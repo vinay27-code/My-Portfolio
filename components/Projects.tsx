@@ -7,7 +7,7 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'Swiggy Clone',
+      title: 'Food Delivery Web App with Live API Integration',
       description: 'A full-featured food delivery application clone built with React, featuring restaurant listings, menu browsing, cart functionality, and order management with a modern, responsive UI.',
       githubUrl: 'https://github.com/vinay27-code/swiggy-clone-using-React.git',
       technologies: ['React', 'JavaScript', 'HTML5', 'CSS3', 'Material-UI'],
