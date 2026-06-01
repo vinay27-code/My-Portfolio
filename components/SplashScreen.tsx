@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import LetterGlitch from './LetterGlitch';
 
 interface SplashScreenProps {
@@ -21,20 +21,17 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
 
   return (
     <div className={`fixed inset-0 z-50 transition-opacity duration-500 ${phase === 'fade' ? 'opacity-0' : 'opacity-100'}`}>
-      {/* LetterGlitch background */}
       <div className="absolute inset-0">
         <LetterGlitch
           glitchColors={['#1a1a2e', '#4a9eff', '#00d4ff']}
-          glitchSpeed={40}
+          glitchSpeed={60}
           outerVignette={true}
           centerVignette={false}
           smooth={true}
         />
       </div>
 
-      {/* Center content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 text-center">
-
         <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-3xl mb-6">
           He doesn't just write code.
           <br />
@@ -42,7 +39,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             He ships systems that scale.
           </span>
         </h1>
-
       </div>
 
       <style jsx>{`

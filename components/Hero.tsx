@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-// Inline Prism — no dynamic import issues
 function PrismCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let raf = 0;
     let cleanup = false;
+    let isVisible = true;
 
     const init = async () => {
       try {
@@ -20,7 +20,10 @@ function PrismCanvas() {
         const H = 3.5, BW = 5.5, BASE_HALF = BW * 0.5;
         const SCALE = 3.6, GLOW = 1, BLOOM = 1.2, NOISE = 0, TS = 0.4, CFREQ = 1;
 
-        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        // Cap DPR at 1 on mobile for performance
+        const isMobile = window.innerWidth < 768;
+        const dpr = isMobile ? 1 : Math.min(1.5, window.devicePixelRatio || 1);
+
         const renderer = new Renderer({ dpr, alpha: true, antialias: false });
         const gl = renderer.gl;
         gl.clearColor(0, 0, 0, 0);
@@ -35,8 +38,9 @@ function PrismCanvas() {
         container.appendChild(gl.canvas);
 
         const vertex = `attribute vec2 position; void main(){gl_Position=vec4(position,0.,1.);}`;
+        // Reduced from 100 to 60 steps for better performance
         const fragment = `
-          precision highp float;
+          precision mediump float;
           uniform vec2 iResolution; uniform float iTime;
           uniform float uH,uBH,uGlow,uNoise,uSat,uScale,uCFreq,uBloom,uCS,uIBH,uIH,uMinA,uPxS,uTS;
           uniform mat3 uRot; uniform int uWob;
@@ -49,7 +53,7 @@ function PrismCanvas() {
             float z=5.,d=0.; vec3 p; vec4 o=vec4(0.);
             mat2 wob=mat2(1.);
             if(uWob==1){float t=iTime*uTS;wob=mat2(cos(t),cos(t+33.),cos(t+11.),cos(t));}
-            for(int i=0;i<100;i++){
+            for(int i=0;i<60;i++){
               p=vec3(f,z); p.xz=p.xz*wob; p=uRot*p;
               vec3 q=p; q.y+=uCS;
               d=.1+.2*abs(sdP(q)); z-=d;
@@ -57,7 +61,6 @@ function PrismCanvas() {
             }
             o=tanh4(o*o*(uGlow*uBloom)/1e5);
             vec3 col=o.rgb;
-            col+=(rand(gl_FragCoord.xy+vec2(iTime))-.5)*uNoise;
             col=clamp(col,0.,1.);
             float L=dot(col,vec3(.2126,.7152,.0722));
             col=clamp(mix(vec3(L),col,1.5),0.,1.);
@@ -96,9 +99,23 @@ function PrismCanvas() {
         ro.observe(container);
         resize();
 
+        // Pause when tab hidden or section not visible
+        const handleVisibility = () => {
+          isVisible = !document.hidden;
+          if (isVisible && !raf) raf = requestAnimationFrame(render);
+        };
+        document.addEventListener('visibilitychange', handleVisibility);
+
+        // Pause Prism when hero scrolls out of view
+        const io = new IntersectionObserver((entries) => {
+          isVisible = entries[0].isIntersecting;
+          if (isVisible && !raf) raf = requestAnimationFrame(render);
+        }, { threshold: 0 });
+        io.observe(container);
+
         const t0 = performance.now();
         const render = (t: number) => {
-          if (cleanup) return;
+          if (cleanup || !isVisible) { raf = 0; return; }
           program.uniforms.iTime.value = (t - t0) * 0.001;
           renderer.render({ scene: mesh });
           raf = requestAnimationFrame(render);
@@ -109,6 +126,8 @@ function PrismCanvas() {
           cleanup = true;
           cancelAnimationFrame(raf);
           ro.disconnect();
+          io.disconnect();
+          document.removeEventListener('visibilitychange', handleVisibility);
           if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
         };
       } catch (e) {
@@ -129,10 +148,7 @@ function PrismCanvas() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{
-      position: 'absolute', inset: 0,
-      width: '100%', height: '100%'
-    }} />
+    <div ref={containerRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
   );
 }
 
@@ -163,17 +179,11 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#080808]">
-      {/* Prism background */}
       <PrismCanvas />
-
-      {/* Bottom fade to match rest of page */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#080808] to-transparent z-10 pointer-events-none" />
 
-      {/* Content */}
       <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
-        <p className="text-white/50 text-sm tracking-[0.3em] uppercase mb-6">
-          Hello, I'm
-        </p>
+        <p className="text-white/50 text-sm tracking-[0.3em] uppercase mb-6">Hello, I'm</p>
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight">
           Vinay Babu Machha
         </h1>
@@ -185,7 +195,6 @@ export default function Hero() {
           AWS Certified Solutions Architect building production-grade AI platforms,
           full-stack SaaS applications, and cloud-native systems.
         </p>
-
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
@@ -202,7 +211,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
         <i className="ri-arrow-down-line text-white/30 text-xl"></i>
       </div>

@@ -1,6 +1,21 @@
 'use client';
 
+import { useRef, useEffect, useState } from 'react';
+
 export default function Skills() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Only animate marquee when section is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const logos: Record<string, string> = {
     'JavaScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
     'TypeScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
@@ -34,7 +49,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 px-6 bg-[#0c0c0c]">
+    <section id="skills" ref={sectionRef} className="py-24 px-6 bg-[#0c0c0c]">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Tech Stack</h2>
@@ -44,14 +59,22 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Marquee */}
+        {/* Marquee — only animates when visible */}
         <div className="overflow-hidden mb-14">
-          <div className="flex gap-6 animate-marquee whitespace-nowrap">
+          <div
+            className="flex gap-6 whitespace-nowrap"
+            style={{
+              animation: isVisible ? 'marquee 30s linear infinite' : 'none',
+            }}
+          >
             {[...allSkills, ...allSkills].map((skill, i) => (
-              <div key={i} className="flex-shrink-0 flex flex-col items-center gap-2 bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 hover:bg-white/[0.06] transition-all cursor-default">
+              <div key={i} className="flex-shrink-0 flex flex-col items-center gap-2 bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 hover:bg-white/[0.06] transition-colors cursor-default">
                 <img
                   src={logos[skill]}
                   alt={skill}
+                  loading="lazy"
+                  width={32}
+                  height={32}
                   className="w-8 h-8 object-contain"
                 />
                 <span className="text-white/50 text-xs">{skill}</span>
@@ -82,10 +105,7 @@ export default function Skills() {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-        .animate-marquee:hover {
+        div:hover > div {
           animation-play-state: paused;
         }
       `}</style>
