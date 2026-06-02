@@ -37,7 +37,7 @@ export default function Certifications() {
 
         <div className="grid md:grid-cols-2 gap-4">
           {certs.map((c, i) => (
-            <div key={i} className="flex items-center gap-4 border border-white/10 rounded-xl p-5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
+            <div key={i} className="flex items-center gap-4 border border-white/10 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
               <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 p-2">
                 <img src={c.logo} alt={c.issuer} className="w-full h-full object-contain" />
               </div>

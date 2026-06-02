@@ -22,7 +22,7 @@ export default function Experience() {
           </p>
         </div>
 
-        <div className="border border-white/10 rounded-2xl p-8 bg-white/[0.02]">
+        <div className="border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-8 bg-white/[0.02]">
           <div className="flex items-center gap-3 mb-6">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/10 text-white/70 border border-white/10">
               Co-op
@@ -45,7 +45,7 @@ export default function Experience() {
 
           <div className="flex flex-wrap gap-2">
             {technologies.map((t, i) => (
-              <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white/50 text-xs">
+              <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white/50 text-xs">
                 {t}
               </span>
             ))}
@@ -59,7 +59,7 @@ export default function Experience() {
             { num: '23+', label: 'APIs Integrated' },
             { num: '15+', label: 'Features Shipped' }
           ].map((s, i) => (
-            <div key={i} className="border border-white/10 rounded-xl p-6 text-center bg-white/[0.02]">
+            <div key={i} className="border border-white/10 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-6 text-center bg-white/[0.02]">
               <div className="text-3xl font-bold text-white mb-1">{s.num}</div>
               <div className="text-white/40 text-sm">{s.label}</div>
             </div>

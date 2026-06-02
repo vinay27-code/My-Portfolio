@@ -13,11 +13,11 @@ export default function About() {
           {/* Photo */}
           <div className="flex justify-center">
             <div className="relative">
-              <div className="w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-white/10">
+              <div className="w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_20px_rgba(100,200,255,0.2)]">
                 <img
                   src="/vinay.JPG"
                   alt="Vinay Babu Machha"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-top" loading="lazy"
                 />
               </div>
               {/* Subtle glow */}
@@ -48,7 +48,7 @@ export default function About() {
 
             <div className="flex flex-wrap gap-3 pt-2">
               {['Full Stack Development', 'AI / GenAI Engineering', 'Cloud Architecture', 'Microsoft Dynamics 365'].map(tag => (
-                <span key={tag} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white/70 text-sm">
+                <span key={tag} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white/70 text-sm">
                   {tag}
                 </span>
               ))}

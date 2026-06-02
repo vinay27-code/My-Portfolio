@@ -68,7 +68,7 @@ export default function Skills() {
             }}
           >
             {[...allSkills, ...allSkills].map((skill, i) => (
-              <div key={i} className="flex-shrink-0 flex flex-col items-center gap-2 bg-white/[0.03] border border-white/10 rounded-xl px-5 py-4 hover:bg-white/[0.06] transition-colors cursor-default">
+              <div key={i} className="flex-shrink-0 flex flex-col items-center gap-2 bg-white/[0.03] border border-white/10 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.07)] px-5 py-4 hover:bg-white/[0.06] transition-colors cursor-default">
                 <img
                   src={logos[skill]}
                   alt={skill}
@@ -86,11 +86,11 @@ export default function Skills() {
         {/* Category grid */}
         <div className="grid md:grid-cols-2 gap-4">
           {categories.map((cat, i) => (
-            <div key={i} className="border border-white/10 rounded-xl p-6 bg-white/[0.02]">
+            <div key={i} className="border border-white/10 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-6 bg-white/[0.02]">
               <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">{cat.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((s, j) => (
-                  <span key={j} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white/70 text-sm">
+                  <span key={j} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white/70 text-sm">
                     {s}
                   </span>
                 ))}

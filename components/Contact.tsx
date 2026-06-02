@@ -52,7 +52,7 @@ export default function Contact() {
                 { icon: 'ri-map-pin-line', label: 'Location', value: 'Tempe, AZ' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center">
+                  <div className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] flex items-center justify-center">
                     <i className={`${item.icon} text-white/50 text-base`}></i>
                   </div>
                   <div>
@@ -72,7 +72,7 @@ export default function Contact() {
                   { href: 'https://www.instagram.com/vinay._.27', icon: 'ri-instagram-line' },
                 ].map((s, i) => (
                   <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center hover:bg-white/10 transition-all">
+                    className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] flex items-center justify-center hover:bg-white/10 transition-all">
                     <i className={`${s.icon} text-white/50 text-base`}></i>
                   </a>
                 ))}
@@ -81,7 +81,7 @@ export default function Contact() {
           </div>
 
           {/* Form */}
-          <div className="border border-white/10 rounded-2xl p-8 bg-white/[0.02]">
+          <div className="border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-8 bg-white/[0.02]">
             {submitted ? (
               <div className="h-full flex items-center justify-center text-center">
                 <div>
@@ -101,32 +101,32 @@ export default function Contact() {
                   <div>
                     <label className="text-white/40 text-xs mb-1.5 block">Name</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors"
                       placeholder="Your Name" />
                   </div>
                   <div>
                     <label className="text-white/40 text-xs mb-1.5 block">Email</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors"
                       placeholder="your@email.com" />
                   </div>
                 </div>
                 <div>
                   <label className="text-white/40 text-xs mb-1.5 block">Subject</label>
                   <input type="text" name="subject" value={formData.subject} onChange={handleChange} required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors"
                     placeholder="Project Discussion" />
                 </div>
                 <div>
                   <label className="text-white/40 text-xs mb-1.5 block">Message</label>
                   <textarea name="message" value={formData.message} onChange={handleChange} required
                     rows={5} maxLength={500}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors resize-none"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20 transition-colors resize-none"
                     placeholder="Tell me about your project..." />
                   <p className="text-right text-white/20 text-xs mt-1">{formData.message.length}/500</p>
                 </div>
                 <button type="submit" disabled={isSubmitting}
-                  className="w-full py-3 bg-white text-[#080808] rounded-lg font-semibold text-sm hover:bg-white/90 transition-all disabled:opacity-50 cursor-pointer">
+                  className="w-full py-3 bg-white text-[#080808] rounded-lg shadow-[0_0_20px_rgba(100,200,255,0.2)] font-semibold text-sm hover:bg-white/90 transition-all disabled:opacity-50 cursor-pointer">
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>

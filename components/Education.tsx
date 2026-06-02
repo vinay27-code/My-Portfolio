@@ -35,10 +35,10 @@ export default function Education() {
 
         <div className="space-y-6">
           {educationData.map((edu, i) => (
-            <div key={i} className="border border-white/10 rounded-2xl p-8 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
+            <div key={i} className="border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-8 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 p-3">
-                  <img src={edu.logo} alt={edu.school} className="w-full h-full object-contain" />
+                  <img src={edu.logo} alt={edu.school} className="w-full h-full object-contain" loading="lazy" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
@@ -54,7 +54,7 @@ export default function Education() {
                   <h3 className="text-xl font-bold text-white mb-1">{edu.degree}</h3>
                   <p className="text-white/60 mb-1">{edu.school}</p>
                   <p className="text-white/30 text-sm mb-3">{edu.location}</p>
-                  <span className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-white/70 text-sm">
+                  <span className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white/70 text-sm">
                     {edu.cgpa}
                   </span>
                 </div>

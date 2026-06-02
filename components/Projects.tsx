@@ -41,7 +41,7 @@ export default function Projects() {
 
         <div className="space-y-6">
           {projects.map((p) => (
-            <div key={p.num} className="border border-white/10 rounded-2xl p-8 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
+            <div key={p.num} className="border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-8 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300">
               <div className="flex flex-col lg:flex-row lg:items-start gap-8">
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-4">
@@ -64,7 +64,7 @@ export default function Projects() {
 
                   <div className="flex flex-wrap gap-2">
                     {p.tech.map((t, i) => (
-                      <span key={i} className="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-lg text-white/40 text-xs">
+                      <span key={i} className="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded-lg shadow-[0_0_20px_rgba(255,255,255,0.07)] text-white/40 text-xs">
                         {t}
                       </span>
                     ))}
@@ -73,7 +73,7 @@ export default function Projects() {
 
                 <div className="flex lg:flex-col gap-3 flex-shrink-0">
                   <Link href={p.liveUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#080808] rounded-xl text-sm font-semibold hover:bg-white/90 transition-all whitespace-nowrap">
+                    className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#080808] rounded-xl shadow-[0_0_20px_rgba(100,200,255,0.2)] text-sm font-semibold hover:bg-white/90 transition-all whitespace-nowrap">
                     <i className="ri-external-link-line"></i>
                     Live Demo
                   </Link>
@@ -88,7 +88,7 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="mt-8 text-center border border-white/10 rounded-2xl p-8 bg-white/[0.02]">
+        <div className="mt-8 text-center border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-8 bg-white/[0.02]">
           <p className="text-white/40 text-sm mb-4">More projects and experiments on GitHub</p>
           <Link href="https://github.com/vinay27-code" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 border border-white/10 text-white/60 rounded-xl text-sm hover:bg-white/10 transition-all">
