@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CursorTrail() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -8,15 +8,22 @@ export default function CursorTrail() {
   const pos = useRef({ x: 0, y: 0 });
   const trailPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
+    // Only show on non-touch devices
+    setIsMobile(window.matchMedia('(pointer: coarse)').matches);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
     };
     window.addEventListener('mousemove', handleMove);
 
     const animate = () => {
-      // Trail follows with delay (lerp)
       trailPos.current.x += (pos.current.x - trailPos.current.x) * 0.12;
       trailPos.current.y += (pos.current.y - trailPos.current.y) * 0.12;
 
@@ -26,7 +33,6 @@ export default function CursorTrail() {
       if (trailRef.current) {
         trailRef.current.style.transform = `translate(${trailPos.current.x - 16}px, ${trailPos.current.y - 16}px)`;
       }
-
       rafRef.current = requestAnimationFrame(animate);
     };
     rafRef.current = requestAnimationFrame(animate);
@@ -35,25 +41,16 @@ export default function CursorTrail() {
       window.removeEventListener('mousemove', handleMove);
       cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <>
-      {/* Small sharp dot */}
-      <div
-        ref={dotRef}
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
-        style={{ willChange: 'transform' }}
-      >
+      <div ref={dotRef} className="fixed top-0 left-0 z-[9999] pointer-events-none" style={{ willChange: 'transform' }}>
         <div className="w-2 h-2 rounded-full bg-[#7dd3fc]" />
       </div>
-
-      {/* Larger glowing trailing circle */}
-      <div
-        ref={trailRef}
-        className="fixed top-0 left-0 z-[9998] pointer-events-none"
-        style={{ willChange: 'transform' }}
-      >
+      <div ref={trailRef} className="fixed top-0 left-0 z-[9998] pointer-events-none" style={{ willChange: 'transform' }}>
         <div
           className="w-8 h-8 rounded-full border border-[#7dd3fc]/40"
           style={{

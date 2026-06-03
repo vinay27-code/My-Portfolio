@@ -39,35 +39,39 @@ const FloatingDockMobile = ({
   const [open, setOpen] = useState(false);
   return (
     <div className={cn("relative block md:hidden", className)}>
+      {/* Items expand DOWNWARD since dock is at top */}
       <AnimatePresence>
         {open && (
           <motion.div
             layoutId="nav"
-            className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2"
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 flex flex-col items-center gap-2 z-50"
           >
             {items.map((item, idx) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10, transition: { delay: idx * 0.05 } }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
+                exit={{ opacity: 0, y: -10, transition: { delay: idx * 0.03 } }}
+                transition={{ delay: idx * 0.05 }}
               >
                 <a
                   href={item.href}
-                  key={item.title}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+                  onClick={() => setOpen(false)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-white/20 backdrop-blur-md"
+                  title={item.title}
                 >
-                  <div className="h-4 w-4">{item.icon}</div>
+                  <div className="h-5 w-5">{item.icon}</div>
                 </a>
               </motion.div>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Hamburger button */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 border border-white/20 backdrop-blur-md"
       >
         <IconLayoutNavbarCollapse className="h-5 w-5 text-white/70" />
       </button>

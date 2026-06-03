@@ -165,7 +165,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="text-6xl md:text-8xl font-bold mb-6 tracking-tight"
+          className="text-4xl sm:text-5xl md:text-8xl font-bold mb-6 tracking-tight"
           style={{
             background: 'linear-gradient(135deg, #ffffff 0%, #a5f3fc 50%, #ffffff 100%)',
             backgroundSize: '200% 200%',
