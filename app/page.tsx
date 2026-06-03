@@ -13,6 +13,7 @@ import Certifications from '../components/Certifications';
 import Contact from '../components/Contact';
 import Copyright from '../components/Copyright';
 import ClickSpark from '../components/ClickSpark';
+import CursorTrail from '../components/CursorTrail';
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -56,6 +57,7 @@ export default function Home() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="min-h-screen bg-[#080808] text-white"
       >
+        <CursorTrail />
         <Header activeSection={activeSection} scrollToSection={scrollToSection} />
         <main>
           <Hero />

@@ -1,14 +1,15 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { useRef } from 'react';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] } }
 };
 
-const stagger = {
+const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.1 } }
 };
 
