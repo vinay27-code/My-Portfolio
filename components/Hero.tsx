@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 function PrismCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,8 +20,6 @@ function PrismCanvas() {
 
         const H = 3.5, BW = 5.5, BASE_HALF = BW * 0.5;
         const SCALE = 3.6, GLOW = 1, BLOOM = 1.2, NOISE = 0, TS = 0.4, CFREQ = 1;
-
-        // Cap DPR at 1 on mobile for performance
         const isMobile = window.innerWidth < 768;
         const dpr = isMobile ? 1 : Math.min(1.5, window.devicePixelRatio || 1);
 
@@ -31,14 +30,10 @@ function PrismCanvas() {
         gl.disable(gl.CULL_FACE);
         gl.disable(gl.BLEND);
 
-        Object.assign(gl.canvas.style, {
-          position: 'absolute', inset: '0',
-          width: '100%', height: '100%', display: 'block'
-        });
+        Object.assign(gl.canvas.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
         container.appendChild(gl.canvas);
 
         const vertex = `attribute vec2 position; void main(){gl_Position=vec4(position,0.,1.);}`;
-        // Reduced from 100 to 60 steps for better performance
         const fragment = `
           precision mediump float;
           uniform vec2 iResolution; uniform float iTime;
@@ -60,8 +55,7 @@ function PrismCanvas() {
               o+=(sin((p.y+z)*uCFreq+vec4(0.,1.,2.,3.))+1.)/d;
             }
             o=tanh4(o*o*(uGlow*uBloom)/1e5);
-            vec3 col=o.rgb;
-            col=clamp(col,0.,1.);
+            vec3 col=o.rgb; col=clamp(col,0.,1.);
             float L=dot(col,vec3(.2126,.7152,.0722));
             col=clamp(mix(vec3(L),col,1.5),0.,1.);
             gl_FragColor=vec4(col,o.a);
@@ -76,14 +70,10 @@ function PrismCanvas() {
           uniforms: {
             iResolution:{value:iResBuf}, iTime:{value:0},
             uH:{value:H}, uBH:{value:BASE_HALF}, uWob:{value:1},
-            uRot:{value:rotBuf}, uGlow:{value:GLOW},
-            uNoise:{value:NOISE}, uSat:{value:1.5},
-            uScale:{value:SCALE}, uCFreq:{value:CFREQ},
-            uBloom:{value:BLOOM}, uCS:{value:H*0.25},
-            uIBH:{value:1/BASE_HALF}, uIH:{value:1/H},
-            uMinA:{value:Math.min(BASE_HALF,H)},
-            uPxS:{value:1/((gl.drawingBufferHeight||1)*0.1*SCALE)},
-            uTS:{value:TS}
+            uRot:{value:rotBuf}, uGlow:{value:GLOW}, uNoise:{value:NOISE}, uSat:{value:1.5},
+            uScale:{value:SCALE}, uCFreq:{value:CFREQ}, uBloom:{value:BLOOM}, uCS:{value:H*0.25},
+            uIBH:{value:1/BASE_HALF}, uIH:{value:1/H}, uMinA:{value:Math.min(BASE_HALF,H)},
+            uPxS:{value:1/((gl.drawingBufferHeight||1)*0.1*SCALE)}, uTS:{value:TS}
           }
         });
         const mesh = new Mesh(gl, { geometry, program });
@@ -99,15 +89,9 @@ function PrismCanvas() {
         ro.observe(container);
         resize();
 
-        // Pause when tab hidden or section not visible
-        const handleVisibility = () => {
-          isVisible = !document.hidden;
-          if (isVisible && !raf) raf = requestAnimationFrame(render);
-        };
+        const handleVisibility = () => { isVisible = !document.hidden; if (isVisible && !raf) raf = requestAnimationFrame(render); };
         document.addEventListener('visibilitychange', handleVisibility);
-
-        // Pause Prism when hero scrolls out of view
-        const io = new IntersectionObserver((entries) => {
+        const io = new IntersectionObserver(entries => {
           isVisible = entries[0].isIntersecting;
           if (isVisible && !raf) raf = requestAnimationFrame(render);
         }, { threshold: 0 });
@@ -130,49 +114,34 @@ function PrismCanvas() {
           document.removeEventListener('visibilitychange', handleVisibility);
           if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
         };
-      } catch (e) {
-        console.error('Prism init error:', e);
-      }
+      } catch (e) { console.error('Prism init error:', e); }
     };
 
     init();
-
     return () => {
       cleanup = true;
       cancelAnimationFrame(raf);
       const container = containerRef.current;
-      if (container && (container as any).__prismCleanup) {
-        (container as any).__prismCleanup();
-      }
+      if (container && (container as any).__prismCleanup) (container as any).__prismCleanup();
     };
   }, []);
 
-  return (
-    <div ref={containerRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
-  );
+  return <div ref={containerRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />;
 }
 
 export default function Hero() {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-
   const roles = ['Software Engineer', 'Full Stack Developer', 'AI Engineer', 'Cloud Architect'];
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       const current = roles[currentIndex];
-      if (isDeleting) {
-        setCurrentText(current.substring(0, currentText.length - 1));
-      } else {
-        setCurrentText(current.substring(0, currentText.length + 1));
-      }
-      if (!isDeleting && currentText === current) {
-        setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && currentText === '') {
-        setIsDeleting(false);
-        setCurrentIndex(prev => (prev + 1) % roles.length);
-      }
+      if (isDeleting) { setCurrentText(current.substring(0, currentText.length - 1)); }
+      else { setCurrentText(current.substring(0, currentText.length + 1)); }
+      if (!isDeleting && currentText === current) { setTimeout(() => setIsDeleting(true), 1500); }
+      else if (isDeleting && currentText === '') { setIsDeleting(false); setCurrentIndex(prev => (prev + 1) % roles.length); }
     }, isDeleting ? 50 : 100);
     return () => clearTimeout(timeout);
   }, [currentText, isDeleting, currentIndex]);
@@ -183,37 +152,88 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#080808] to-transparent z-10 pointer-events-none" />
 
       <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
-        <p className="text-white/50 text-sm tracking-[0.3em] uppercase mb-6">Hello, I'm</p>
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-white/50 text-sm tracking-[0.3em] uppercase mb-6"
+        >
+          Hello, I'm
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="text-6xl md:text-8xl font-bold mb-6 tracking-tight"
+          style={{
+            background: 'linear-gradient(135deg, #ffffff 0%, #a5f3fc 50%, #ffffff 100%)',
+            backgroundSize: '200% 200%',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            animation: 'gradientShift 4s ease infinite'
+          }}
+        >
           Vinay Babu Machha
-        </h1>
-        <div className="text-2xl md:text-3xl font-light text-white/70 h-10 mb-8 flex items-center justify-center gap-2">
+        </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-2xl md:text-3xl font-light text-white/70 h-10 mb-8 flex items-center justify-center gap-2"
+        >
           <span>{currentText}</span>
           <span className="animate-pulse text-white/40">|</span>
-        </div>
-        <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-12">
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-base md:text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-12"
+        >
           AWS Certified Solutions Architect building production-grade AI platforms,
           full-stack SaaS applications, and cloud-native systems.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-3 bg-white text-[#080808] rounded-full font-semibold hover:bg-white/90 transition-all duration-300 cursor-pointer text-sm shadow-[0_0_20px_rgba(100,200,255,0.2)]"
           >
             View My Work
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="px-8 py-3 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition-all duration-300 cursor-pointer text-sm"
           >
             Get In Touch
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
         <i className="ri-arrow-down-line text-white/30 text-xl"></i>
       </div>
+
+      <style jsx global>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </section>
   );
 }
