@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import SplashScreen from '../components/SplashScreen';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -12,6 +11,7 @@ import Projects from '../components/Projects';
 import Certifications from '../components/Certifications';
 import Contact from '../components/Contact';
 import Copyright from '../components/Copyright';
+import ClickSpark from '../components/ClickSpark';
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
@@ -46,19 +46,27 @@ export default function Home() {
   if (showSplash) return <SplashScreen onComplete={() => setShowSplash(false)} />;
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white">
-      <Header activeSection={activeSection} scrollToSection={scrollToSection} />
-      <main>
-        <Hero />
-        <About />
-        <Education />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Certifications />
-        <Contact />
-        <Copyright />
-      </main>
-    </div>
+    <ClickSpark
+      sparkColor="#7dd3fc"
+      sparkSize={12}
+      sparkRadius={20}
+      sparkCount={8}
+      duration={500}
+    >
+      <div className="min-h-screen bg-[#080808] text-white">
+        <Header activeSection={activeSection} scrollToSection={scrollToSection} />
+        <main>
+          <Hero />
+          <About />
+          <Education />
+          <Experience />
+          <Skills />
+          <Projects />
+          <Certifications />
+          <Contact />
+          <Copyright />
+        </main>
+      </div>
+    </ClickSpark>
   );
 }
