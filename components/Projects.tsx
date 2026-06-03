@@ -1,8 +1,8 @@
 'use client';
 
+import { motion, useInView, type Variants } from 'framer-motion';
+
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
-import type { Variants } from 'framer-motion';
 import { useRef, useState } from 'react';
 
 const fadeUp: Variants = {
