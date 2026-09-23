@@ -6,7 +6,6 @@ export default function Skills() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Only animate marquee when section is visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
@@ -21,20 +20,20 @@ export default function Skills() {
     'TypeScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
     'Python': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
     'Java': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
-    'C#': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg',
-    'C++': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
-    'SQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+    'SQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
     'React': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    'Angular': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
+    'Next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
     'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
     'PostgreSQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
     'MongoDB': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
     'Redis': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
     'Docker': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    'Kubernetes': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
+    'Terraform': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg',
     'Git': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
     'AWS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
-    'Azure': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg',
-    'TensorFlow': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
-    'PyTorch': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg',
+    'GCP': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg',
     'HTML5': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
     'CSS3': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
   };
@@ -42,10 +41,10 @@ export default function Skills() {
   const allSkills = Object.keys(logos);
 
   const categories = [
-    { title: 'Languages', skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'SQL', 'C++'] },
-    { title: 'Frontend', skills: ['React', 'HTML5', 'CSS3', 'Tailwind CSS', 'Redux', 'Next.js'] },
-    { title: 'Backend & Databases', skills: ['Node.js', 'Express', 'REST APIs', 'PostgreSQL', 'MongoDB', 'Redis'] },
-    { title: 'AI & Cloud', skills: ['GPT-4o', 'LangChain', 'RAG', 'TensorFlow', 'PyTorch', 'AWS', 'Azure', 'Docker', 'CI/CD'] },
+    { title: 'Languages', skills: ['Python', 'Java 21', 'TypeScript', 'JavaScript', 'SQL', 'HTML5', 'CSS3'] },
+    { title: 'Agentic AI & Retrieval', skills: ['Anthropic Claude', 'OpenAI API', 'Gemini API', 'LangChain', 'LangGraph', 'RAG', 'MCP', 'Tool Calling', 'Structured Outputs', 'pgvector', 'Supabase'] },
+    { title: 'Backend & Frontend', skills: ['Spring Boot 3', 'FastAPI', 'Node.js', 'REST APIs', 'Microservices', 'Pydantic v2', 'React', 'Angular 18', 'Next.js', 'Redux', 'Tailwind CSS'] },
+    { title: 'Data, Cloud & DevOps', skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Apache Kafka', 'AWS', 'GCP', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'CI/CD', 'Grafana'] },
   ];
 
   return (
@@ -55,11 +54,10 @@ export default function Skills() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Tech Stack</h2>
           <div className="w-16 h-px bg-white/20 mx-auto mb-6"></div>
           <p className="text-white/40 max-w-xl mx-auto text-sm">
-            Technologies and tools I work with to build production-grade applications.
+            Technologies and tools I use across full-stack engineering, agentic AI, distributed systems, and cloud infrastructure.
           </p>
         </div>
 
-        {/* Marquee — only animates when visible */}
         <div className="overflow-hidden mb-14">
           <div
             className="flex gap-6 whitespace-nowrap"
@@ -83,7 +81,6 @@ export default function Skills() {
           </div>
         </div>
 
-        {/* Category grid */}
         <div className="grid md:grid-cols-2 gap-4">
           {categories.map((cat, i) => (
             <div key={i} className="border border-white/10 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.07)] p-6 bg-white/[0.02]">

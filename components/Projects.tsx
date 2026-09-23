@@ -3,7 +3,7 @@
 import { motion, useInView, type Variants } from 'framer-motion';
 
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -21,25 +21,34 @@ export default function Projects() {
   const projects = [
     {
       num: '01',
-      title: 'DevAssist AI',
-      subtitle: 'Full-Stack AI SaaS Platform',
-      category: 'AI / Full Stack',
-      description: 'Production SaaS platform with GPT-4o-powered code review, RAG pipeline for codebase intelligence, Kanban project management, multi-tenant architecture, JWT authentication, RBAC, and Stripe billing. Deployed on AWS ECS Fargate with CI/CD via GitHub Actions.',
-      metrics: ['99.9% uptime', '60% effort reduction', '1,000+ docs indexed'],
-      tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'PGVector', 'GPT-4o', 'LangChain', 'RAG', 'Stripe', 'AWS'],
-      liveUrl: 'https://d14ibyhkpahx28.cloudfront.net',
-      githubUrl: 'https://github.com/vinay27-code/devassist-ai',
+      title: 'LegacyForge',
+      subtitle: 'Agentic AI Legacy Java Migration Platform',
+      category: 'Agentic AI / Full Stack',
+      description: 'Agentic AI platform that analyzes legacy Java repositories, embeds source files in pgvector for semantic search, generates phased migration plans, runs parallel LLM agents to produce Spring Boot 3 and Angular 18 equivalents, validates generated Java, and closes dependency gaps through a self-healing feedback loop.',
+      metrics: ['208 artifacts generated', '$0.06 OpenAI spend', '6 parallel LLM agents'],
+      tech: ['Java 21', 'Spring Boot 3', 'Angular 18', 'pgvector', 'OpenAI', 'Supabase', 'GCP Cloud Run', 'Docker'],
+      liveUrl: 'https://legacyforge.vercel.app',
+      githubUrl: 'https://github.com/vinay27-code/legacyforge',
     },
     {
       num: '02',
-      title: 'FinSight AI',
-      subtitle: 'Real-Time Financial Intelligence Dashboard',
-      category: 'AI / FinTech',
-      description: 'Real-time financial dashboard streaming live stock and crypto prices via WebSockets with sub-100ms latency. GPT-4o anomaly detection with severity classification, portfolio P&L tracking with live mark-to-market valuation, and Redis caching reducing API calls by 80%.',
-      metrics: ['Sub-100ms latency', '80% API reduction', 'Live market data'],
-      tech: ['React', 'TypeScript', 'Node.js', 'WebSockets', 'PostgreSQL', 'Redis', 'GPT-4o', 'AWS ECS Fargate'],
-      liveUrl: 'https://d3912z30eazd41.cloudfront.net',
-      githubUrl: 'https://github.com/vinay27-code/finsight-ai',
+      title: 'DocuStream',
+      subtitle: 'LLM-Powered Document Intelligence Platform',
+      category: 'AI / Backend',
+      description: 'Local LLM-powered document processing platform that classifies invoices, purchase orders, and contracts, extracts structured fields, scores confidence, routes low-confidence results to human review, and evaluates field-level extraction accuracy against ground truth.',
+      metrics: ['95% extraction accuracy', '120 evaluated fields', '20 automated tests'],
+      tech: ['Python', 'FastAPI', 'Ollama', 'PostgreSQL', 'Pydantic', 'Docker', 'Pytest'],
+      githubUrl: 'https://github.com/vinay27-code/docustream',
+    },
+    {
+      num: '03',
+      title: 'PulseFlow',
+      subtitle: 'Real-Time Data Intelligence Platform',
+      category: 'Data / Distributed Systems',
+      description: 'Production-style event streaming pipeline that ingests, validates, deduplicates, and analyzes high-volume e-commerce events in real time using Kafka, PostgreSQL, dbt, FastAPI, and Grafana, with dead-letter queue handling and at-least-once delivery.',
+      metrics: ['1M events processed', '405 events/sec', '98.97% valid rate'],
+      tech: ['Python', 'Kafka', 'PostgreSQL', 'dbt', 'FastAPI', 'Grafana', 'Docker', 'Pydantic'],
+      githubUrl: 'https://github.com/vinay27-code/pulseflow',
     },
   ];
 
@@ -55,7 +64,7 @@ export default function Projects() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">My Projects</h2>
           <div className="w-16 h-px bg-white/20 mx-auto mb-6"></div>
           <p className="text-white/40 max-w-xl mx-auto text-sm">
-            Production AI-powered platforms built from scratch and deployed on AWS, serving real users.
+            Production-style systems spanning agentic AI, document intelligence, and distributed data engineering.
           </p>
         </motion.div>
 
@@ -105,11 +114,13 @@ export default function Projects() {
                   </div>
                 </div>
                 <div className="flex lg:flex-col gap-3 flex-shrink-0">
-                  <Link href={p.liveUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#080808] rounded-xl text-sm font-semibold hover:bg-white/90 transition-all whitespace-nowrap shadow-[0_0_20px_rgba(100,200,255,0.2)]">
-                    <i className="ri-external-link-line"></i>
-                    Live Demo
-                  </Link>
+                  {'liveUrl' in p && p.liveUrl && (
+                    <Link href={p.liveUrl} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#080808] rounded-xl text-sm font-semibold hover:bg-white/90 transition-all whitespace-nowrap shadow-[0_0_20px_rgba(100,200,255,0.2)]">
+                      <i className="ri-external-link-line"></i>
+                      Live Demo
+                    </Link>
+                  )}
                   <Link href={p.githubUrl} target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-2 px-5 py-2.5 bg-white/5 border border-white/10 text-white/70 rounded-xl text-sm hover:bg-white/10 transition-all whitespace-nowrap shadow-[0_0_20px_rgba(255,255,255,0.07)]">
                     <i className="ri-github-line"></i>
