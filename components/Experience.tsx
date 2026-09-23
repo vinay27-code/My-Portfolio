@@ -18,14 +18,15 @@ export default function Experience() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const hclResponsibilities = [
-    'Accomplished 40% reduction in data retrieval latency as measured by SLA benchmarks by providing high-touch technical expertise and partner integration support for enterprise clients using JavaScript, Java, REST APIs, and cloud solutions on AWS.',
-    'Accomplished 60% faster issue resolution as measured by SLA compliance metrics by developing technical documentation, implementation review checklists, and onboarding tools that expedited partner technical challenge resolution across cross-functional teams.',
-    'Accomplished 15+ feature deliveries as measured by sprint velocity by partnering with Product Managers to define, prioritize, and advocate for product improvements backed by data-driven insights using Python, SQL analytics, and machine learning integrations.',
-    'Accomplished 50% faster deployments as measured by release cycle time by building cloud-native solutions in virtualized environments on AWS with Docker, CI/CD pipelines, and Linux-based server infrastructure.',
-    'Accomplished 45% reduction in incident resolution time as measured by MTTR by delivering partner feedback to cross-functional engineering teams and leveraging data and technology to optimize operational scaling across 20+ live services.'
+    'Built LLM-powered and agentic product features integrating Anthropic models through LangChain with structured tool and function calling, delivering 3 capabilities through iterative production releases over 6 weeks.',
+    'Built and optimized a Retrieval Augmented Generation pipeline over enterprise data with an emphasis on correctness and safety, profiled the retrieval stack, and lifted field-level extraction accuracy from 40% to 85% across 120 fields.',
+    'Wired MCP tool servers connecting agents to 5 enterprise REST APIs, replaced per-team connector rewrites with a shared TypeScript library, and cut new tool integration from 3 days to under 4 hours.',
+    'Developed async Python FastAPI backend services backed by persistent PostgreSQL state, applied Pydantic v2 structured output validation and confidence scoring, and routed low-confidence responses for human review.',
+    'Instrumented agent services with Amazon CloudWatch telemetry and Grafana dashboards capturing tool call latency, failure rates, and output anomalies, participated in on-call rotations, and debugged reliability issues in production.',
+    'Applied Claude Code and GitHub Copilot for scaffolding, unit-test generation, debugging, and refactoring while independently reviewing generated code for correctness and maintainability across 3 shipped capabilities.'
   ];
 
-  const hclTechnologies = ['JavaScript', 'Java', 'AWS', 'REST APIs', 'Python', 'SQL', 'Machine Learning', 'Docker', 'CI/CD', 'Linux'];
+  const hclTechnologies = ['Python', 'TypeScript', 'LangChain', 'RAG', 'MCP', 'FastAPI', 'PostgreSQL', 'Pydantic v2', 'Amazon CloudWatch', 'Grafana'];
 
   const responsibilities = [
     'Spearheaded full-stack development of 8+ production-ready web applications using React, TypeScript, Python, and Node.js, delivering clean maintainable code over a 2-year tenure',
@@ -52,7 +53,7 @@ export default function Experience() {
               <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/10 text-white/70 border border-white/10">Full Time</span>
               <span className="text-white/30 text-sm">May 2025 – Present</span>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-1">Full Stack Developer</h3>
+            <h3 className="text-2xl font-bold text-white mb-1">Full Stack AI Developer</h3>
             <p className="text-white/60 mb-1">HCLTech</p>
             <p className="text-white/30 text-sm mb-8">Phoenix, AZ</p>
             <motion.div className="space-y-4 mb-8" variants={stagger}>
