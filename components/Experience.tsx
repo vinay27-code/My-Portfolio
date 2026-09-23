@@ -74,10 +74,10 @@ export default function Experience() {
 
           <motion.div variants={fadeUp} className="border border-white/10 rounded-2xl p-8 bg-white/[0.02] shadow-[0_0_20px_rgba(255,255,255,0.07)]">
             <div className="flex items-center gap-3 mb-6">
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/10 text-white/70 border border-white/10">Co-op</span>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/10 text-white/70 border border-white/10">Full Time</span>
               <span className="text-white/30 text-sm">May 2022 – Jun 2024</span>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-1">Software Engineering Co-op</h3>
+            <h3 className="text-2xl font-bold text-white mb-1">Software Engineer</h3>
             <p className="text-white/60 mb-1">SLS Solutions</p>
             <p className="text-white/30 text-sm mb-8">Hyderabad, India</p>
             <motion.div className="space-y-4 mb-8" variants={stagger}>
