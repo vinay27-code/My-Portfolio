@@ -43,7 +43,30 @@ export default function Certifications() {
               className="flex items-center gap-4 border border-white/10 rounded-xl p-5 bg-white/[0.02] shadow-[0_0_20px_rgba(255,255,255,0.07)]"
             >
               <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 p-2">
-                <img src={c.logo} alt={c.issuer} className="w-full h-full object-contain" loading="lazy" />
+                {c.issuer === 'Amazon Web Services' ? (
+                  <div className="flex flex-col items-center justify-center leading-none" aria-label="AWS">
+                    <span className="text-white text-[15px] font-bold tracking-tight">aws</span>
+                    <svg viewBox="0 0 36 12" className="w-8 h-3 mt-0.5" aria-hidden="true">
+                      <path
+                        d="M3 3.5c7.5 4.8 17.2 6.1 29 3.9"
+                        fill="none"
+                        stroke="#FF9900"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M27.5 5.3 32 7.4l-3.3 3"
+                        fill="none"
+                        stroke="#FF9900"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                ) : (
+                  <img src={c.logo} alt={c.issuer} className="w-full h-full object-contain" loading="lazy" />
+                )}
               </div>
               <div>
                 <p className="text-white font-medium text-sm leading-snug">{c.name}</p>
