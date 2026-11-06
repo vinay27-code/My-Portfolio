@@ -2,7 +2,7 @@
 
 import { motion, useInView, type Variants } from 'framer-motion';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -16,6 +16,30 @@ const stagger: Variants = {
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [wavingSrc, setWavingSrc] = useState('');
+
+  useEffect(() => {
+    let active = true;
+
+    Promise.all(
+      [0, 1, 2, 3].map(i =>
+        fetch(`/wave${i}.txt`).then(response => {
+          if (!response.ok) throw new Error('Unable to load animation');
+          return response.text();
+        })
+      )
+    )
+      .then(parts => {
+        if (active) setWavingSrc(`data:image/webp;base64,${parts.join('')}`);
+      })
+      .catch(() => {
+        if (active) setWavingSrc('');
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <section id="about" className="py-24 px-6 bg-transparent">
@@ -37,16 +61,21 @@ export default function About() {
           variants={stagger}
         >
           <motion.div className="flex justify-center" variants={fadeUp}>
-            <div className="relative">
-              <div className="w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_20px_rgba(100,200,255,0.2)]">
+            <div className="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
+              {wavingSrc ? (
                 <img
-                  src="/vinay.JPG"
-                  alt="Vinay Babu Machha"
-                  className="w-full h-full object-cover object-top"
-                  loading="lazy"
+                  src={wavingSrc}
+                  alt="3D animated developer waving hello"
+                  className="w-full h-full object-contain select-none pointer-events-none"
+                  style={{
+                    maskImage: 'radial-gradient(ellipse 72% 76% at 50% 48%, black 55%, transparent 100%)',
+                    WebkitMaskImage: 'radial-gradient(ellipse 72% 76% at 50% 48%, black 55%, transparent 100%)'
+                  }}
                 />
-              </div>
-              <div className="absolute -inset-1 bg-white/5 rounded-2xl blur-xl -z-10"></div>
+              ) : (
+                <div className="text-7xl md:text-8xl animate-pulse" aria-hidden="true">👋</div>
+              )}
+              <div className="absolute inset-x-12 bottom-8 h-10 bg-cyan-400/10 blur-2xl rounded-full -z-10"></div>
             </div>
           </motion.div>
 
