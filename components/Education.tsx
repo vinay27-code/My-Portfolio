@@ -24,7 +24,7 @@ export default function Education() {
       location: 'Tempe, AZ',
       period: 'Aug 2024 – May 2026',
       cgpa: '4.0 / 4.0',
-      status: 'Current',
+      status: 'Completed',
       logo: 'https://static.readdy.ai/image/2fbf82138adadc00bd27f8c5eec01ddf/8426411a782f0daba61235096a08a52e.png'
     },
     {
