@@ -2,7 +2,7 @@
 
 import { motion, useInView, type Variants } from 'framer-motion';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -16,31 +16,6 @@ const stagger: Variants = {
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [wavingSrc, setWavingSrc] = useState('');
-
-  useEffect(() => {
-    let active = true;
-
-    Promise.all(
-      [0, 1, 2, 3].map(i =>
-        fetch(`/wave${i}.txt`).then(response => {
-          if (!response.ok) throw new Error('Unable to load animation');
-          return response.text();
-        })
-      )
-    )
-      .then(parts => {
-        if (active) setWavingSrc(`data:image/webp;base64,${parts.join('')}`);
-      })
-      .catch(() => {
-        if (active) setWavingSrc('');
-      });
-
-    return () => {
-      active = false;
-    };
-  }, []);
-
   return (
     <section id="about" className="py-24 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto" ref={ref}>
@@ -62,20 +37,36 @@ export default function About() {
         >
           <motion.div className="flex justify-center" variants={fadeUp}>
             <div className="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
-              {wavingSrc ? (
-                <img
-                  src={wavingSrc}
-                  alt="3D animated developer waving hello"
-                  className="w-full h-full object-contain select-none pointer-events-none"
-                  style={{
-                    maskImage: 'radial-gradient(ellipse 72% 76% at 50% 48%, black 55%, transparent 100%)',
-                    WebkitMaskImage: 'radial-gradient(ellipse 72% 76% at 50% 48%, black 55%, transparent 100%)'
-                  }}
-                />
-              ) : (
-                <div className="text-7xl md:text-8xl animate-pulse" aria-hidden="true">👋</div>
-              )}
-              <div className="absolute inset-x-12 bottom-8 h-10 bg-cyan-400/10 blur-2xl rounded-full -z-10"></div>
+              <div className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-sm"></div>
+              <div className="absolute w-64 h-40 md:w-80 md:h-52 rounded-[50%] border border-cyan-300/10 rotate-[-14deg]"></div>
+              <div className="absolute w-64 h-40 md:w-80 md:h-52 rounded-[50%] border border-indigo-300/10 rotate-[18deg]"></div>
+              <div className="absolute w-44 h-44 md:w-56 md:h-56 rounded-full bg-cyan-300/10 blur-3xl"></div>
+              <motion.div
+                aria-label="Waving hello"
+                role="img"
+                className="relative z-10 text-[9rem] md:text-[12rem] leading-none select-none drop-shadow-[0_0_32px_rgba(125,211,252,0.22)]"
+                style={{ transformOrigin: '72% 78%' }}
+                animate={{
+                  rotate: [-10, 18, -12, 16, -8, 12, -10],
+                  y: [0, -6, 0, -4, 0],
+                  scale: [1, 1.04, 1, 1.03, 1]
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  repeatDelay: 0.35
+                }}
+              >
+                👋
+              </motion.div>
+              <motion.div
+                className="absolute bottom-9 px-4 py-1.5 rounded-full border border-white/10 bg-black/30 text-white/50 text-xs tracking-[0.22em] uppercase backdrop-blur-sm"
+                animate={{ opacity: [0.45, 0.8, 0.45] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                Hello
+              </motion.div>
             </div>
           </motion.div>
 
