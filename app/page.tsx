@@ -12,6 +12,7 @@ import Projects from '../components/Projects';
 import Certifications from '../components/Certifications';
 import Contact from '../components/Contact';
 import Copyright from '../components/Copyright';
+import Galaxy from '../components/Galaxy';
 import ClickSpark from '../components/ClickSpark';
 
 export default function Home() {
@@ -59,14 +60,38 @@ export default function Home() {
         <Header activeSection={activeSection} scrollToSection={scrollToSection} />
         <main>
           <Hero />
-          <About />
-          <Education />
-          <Experience />
-          <Skills />
-          <Projects />
-          <Certifications />
-          <Contact />
-          <Copyright />
+          <div className="relative bg-[#080808]">
+            <div className="pointer-events-none sticky top-0 h-screen -mb-[100vh] z-0 overflow-hidden">
+              <Galaxy
+                transparent
+                starColors={['#ffffff', '#7dd3fc', '#a5b4fc']}
+                density={0.75}
+                starSpeed={0.25}
+                speed={0.55}
+                glowIntensity={0.2}
+                saturation={0.15}
+                twinkleIntensity={0.25}
+                rotationSpeed={0.03}
+                mouseInteraction
+                mouseRepulsion
+                repulsionStrength={1.25}
+                clickWarp={false}
+                intro={false}
+                opacity={0.7}
+                className="h-full w-full"
+              />
+            </div>
+            <div className="relative z-10">
+              <About />
+              <Education />
+              <Experience />
+              <Skills />
+              <Projects />
+              <Certifications />
+              <Contact />
+              <Copyright />
+            </div>
+          </div>
         </main>
 
         <AnimatePresence>
