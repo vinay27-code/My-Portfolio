@@ -39,7 +39,7 @@ export default function Education() {
   ];
 
   return (
-    <section id="education" className="py-24 px-6 bg-[#0c0c0c]">
+    <section id="education" className="py-24 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div className="text-center mb-16" initial="hidden" animate={isInView ? 'visible' : 'hidden'} variants={fadeUp}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Education</h2>
