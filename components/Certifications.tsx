@@ -20,8 +20,8 @@ export default function Certifications() {
   const certs = [
     { name: 'Microsoft Certified: Power Platform Solutions Architect', issuer: 'Microsoft', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
     { name: 'Microsoft Certified: Power Platform Fundamentals', issuer: 'Microsoft', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
-    { name: 'AWS Certified Solutions Architect – Associate', issuer: 'Amazon Web Services', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg' },
-    { name: 'AWS Certified Cloud Practitioner', issuer: 'Amazon Web Services', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg' },
+    { name: 'AWS Certified Solutions Architect – Associate', issuer: 'Amazon Web Services', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/amazonwebservices.svg' },
+    { name: 'AWS Certified Cloud Practitioner', issuer: 'Amazon Web Services', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/amazonwebservices.svg' },
   ];
 
   return (
