@@ -2,7 +2,7 @@
 
 export default function Copyright() {
   return (
-    <footer className="py-8 px-6 border-t border-white/5 bg-[#080808]">
+    <footer className="py-8 px-6 border-t border-white/5 bg-transparent">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-white/20 text-sm">© {new Date().getFullYear()} Vinay Babu Machha. All rights reserved.</p>
         <div className="flex gap-4">
