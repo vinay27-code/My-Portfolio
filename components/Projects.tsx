@@ -53,7 +53,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 px-6 bg-[#080808]">
+    <section id="projects" className="py-24 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-16"

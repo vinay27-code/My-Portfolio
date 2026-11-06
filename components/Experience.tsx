@@ -39,7 +39,7 @@ export default function Experience() {
   const technologies = ['React', 'TypeScript', 'Python', 'Node.js', 'Java', 'SQL', 'REST APIs', 'JWT', 'CI/CD', 'Git'];
 
   return (
-    <section id="experience" className="py-24 px-6 bg-[#080808]">
+    <section id="experience" className="py-24 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto" ref={ref}>
         <motion.div className="text-center mb-16" initial="hidden" animate={isInView ? 'visible' : 'hidden'} variants={fadeUp}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Experience</h2>
